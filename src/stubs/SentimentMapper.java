@@ -1,5 +1,7 @@
+package stubs;
+
 import java.io.IOException;
-import clover.com.google.gson.Gson;
+import com.google.gson.Gson;
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -12,6 +14,10 @@ public class SentimentMapper extends Mapper<LongWritable, Text, Text, DoubleWrit
         Gson gson = new Gson();
         Review review;
 
+        if (!value.toString().contains("\"text\"")) {
+            return;
+        }
+
         try {
             review = gson.fromJson(value.toString(), Review.class);
         } catch (Exception e) {
@@ -19,9 +25,9 @@ public class SentimentMapper extends Mapper<LongWritable, Text, Text, DoubleWrit
             return;
         }
 
-
         DoubleWritable sentimentValue = new DoubleWritable(review.calculateSentimentValue());
-        Text businessId = new Text(review.business_id);
+        Text businessId = new Text(review.business_id + " (Stars: " + review.stars + ")");
+
 
         context.write(businessId, sentimentValue);
     }

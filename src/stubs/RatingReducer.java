@@ -1,3 +1,5 @@
+package stubs;
+
 import java.io.IOException;
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
@@ -8,8 +10,8 @@ public class RatingReducer extends Reducer<Text, DoubleWritable, Text, DoubleWri
     @Override
     public void reduce(Text key, Iterable<DoubleWritable> values, Context context)
             throws IOException, InterruptedException {
-        int total = 0;
-        int length = 0;
+        double total = 0;
+        double length = 0;
 
         for (DoubleWritable sentiment : values) {
             total += sentiment.get();
