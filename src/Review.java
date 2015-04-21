@@ -2,9 +2,6 @@ import clover.retrotranslator.edu.emory.mathcs.backport.java.util.Arrays;
 
 import java.util.ArrayList;
 
-/**
- * Created by taylorlapeyre on 4/20/15.
- */
 public class Review {
     public String business_id;
     public String date;
@@ -12,6 +9,10 @@ public class Review {
     public String text;
     public String type;
     public String user_id;
+
+    public Review() {
+        // noop
+    }
 
     public double calculateSentimentValue() {
         ArrayList<String> badWords = new ArrayList<String>();
