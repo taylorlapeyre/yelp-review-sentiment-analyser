@@ -1,9 +1,4 @@
-package stubs;
-
-import clover.retrotranslator.edu.emory.mathcs.backport.java.util.Arrays;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+package bigdata;
 
 public class Review {
     public String business_id;

@@ -1,4 +1,4 @@
-package stubs;
+package bigdata;
 
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.DoubleWritable;
@@ -6,7 +6,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.Job;
-
 import java.io.IOException;
 
 public class Main {
@@ -15,9 +14,9 @@ public class Main {
         SentimentEvaluator evaluator = SentimentEvaluator.getInstance();
 
         try {
-            evaluator.readWords();
+            evaluator.buildDataSet();
         } catch (IOException e) {
-            System.out.println("File, where you at?");
+            System.out.println("Unable to find lexicon file.");
             System.exit(1);
         }
 

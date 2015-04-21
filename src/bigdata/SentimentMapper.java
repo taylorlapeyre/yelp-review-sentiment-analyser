@@ -1,4 +1,4 @@
-package stubs;
+package bigdata;
 
 import java.io.IOException;
 import com.google.gson.Gson;
@@ -15,19 +15,14 @@ public class SentimentMapper extends Mapper<LongWritable, Text, Text, DoubleWrit
         Review review;
 
         if (!value.toString().contains("\"text\"")) {
+            // Not a review we're interested in.
             return;
         }
 
-        try {
-            review = gson.fromJson(value.toString(), Review.class);
-        } catch (Exception e) {
-            // Not a review
-            return;
-        }
+        review = gson.fromJson(value.toString(), Review.class);
 
         DoubleWritable sentimentValue = new DoubleWritable(review.calculateSentimentValue());
         Text businessId = new Text(review.business_id + " (Stars: " + review.stars + ")");
-
 
         context.write(businessId, sentimentValue);
     }

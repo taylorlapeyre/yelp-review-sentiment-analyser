@@ -1,6 +1,5 @@
-package stubs;
+package bigdata;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,12 +14,10 @@ public class SentimentEvaluator {
 
     HashMap<String, Double> lexicon = new HashMap<String, Double>();
 
-    private SentimentEvaluator() {
+    private SentimentEvaluator() { }
 
-    }
-
-    public void readWords() throws IOException {
-        FileReader fr = new FileReader("lexicon.ttf");
+    public void buildDataSet() throws IOException {
+        FileReader fr = new FileReader("bigdata/lexicon.ttf");
         BufferedReader reader = new BufferedReader(fr);
         String line;
 
@@ -29,9 +26,9 @@ public class SentimentEvaluator {
             String word = "";
             String polarity = "";
 
-
             String[] properties = line.split(" ");
             for (String property : properties) {
+
                 if (!property.contains("=")) {
                     continue;
                 }
