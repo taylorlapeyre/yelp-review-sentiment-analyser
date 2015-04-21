@@ -12,14 +12,12 @@ public class SentimentMapper extends Mapper<LongWritable, Text, Text, DoubleWrit
     @Override
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         Gson gson = new Gson();
-        Review review;
 
         if (!value.toString().contains("\"text\"")) {
-            // Not a review we're interested in.
-            return;
+            return; // Not a review we're interested in.
         }
 
-        review = gson.fromJson(value.toString(), Review.class);
+        Review review = gson.fromJson(value.toString(), Review.class);
 
         DoubleWritable sentimentValue = new DoubleWritable(review.calculateSentimentValue());
         Text businessId = new Text(review.business_id + " (Stars: " + review.stars + ")");

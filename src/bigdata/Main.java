@@ -21,7 +21,7 @@ public class Main {
         }
 
 
-	    Job job = new Job();
+        Job job = new Job();
         job.setJarByClass(Main.class);
         job.setJobName("Yelp Sentiment Analysis");
 

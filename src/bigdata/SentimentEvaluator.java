@@ -12,7 +12,7 @@ public class SentimentEvaluator {
         return ourInstance;
     }
 
-    HashMap<String, Double> lexicon = new HashMap<String, Double>();
+    public HashMap<String, Double> lexicon = new HashMap<String, Double>();
 
     private SentimentEvaluator() { }
 
