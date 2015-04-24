@@ -6,13 +6,9 @@ This is a Hadoop mapreduce program for [Yelp's academic dataset](https://www.yel
 
 ### Results
 
-The accuracy rating is the measure of how close to the truth our predictions were. At zero, we are perfectly accurate.
+The accuracy rating is the measure of how close to the truth our predictions were. At zero, we are perfectly accurate. A **positive** accuracy rating means that we think that reviewers generally rate more negatively than they think. Conversely, a **negative** value indicates that users tend to inflate their rating.
 
-An accuracy rating *higher* than zero means that we think that reviewers generally rate more negatively than they think.
-
-Conversely, a *negative value* indicates that users tend to inflate their rating.
-
-This algorithm outputs an accuracy rating of **1.0857501712391706**.
+This algorithm outputs an accuracy rating of **1.0857501712391706** when run over a dataset of 474,434 reviews.
 
 
 ### Running It
