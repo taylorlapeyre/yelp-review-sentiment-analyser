@@ -18,9 +18,17 @@ public class Review {
 
         double sentiment = 2.5;
 
-        for (String word : this.text.split("\\W+")) {
+        String[] words = this.text.replaceAll("[\"#$%^&*@\\-=:;?().,]", "").split("\\W+");
+
+        for (String word : words) {
+            boolean isExtreme = word.contains("!");
+            if (isExtreme) { word = word.replaceAll("!", ""); }
+
             if (evaluator.lexicon.containsKey(word)) {
-                sentiment += evaluator.lexicon.get(word);
+                double lexiconValue = evaluator.lexicon.get(word);
+                double bonus = isExtreme ? (2 * lexiconValue) : 0;
+
+                sentiment += lexiconValue + bonus;
             }
         }
 

@@ -20,13 +20,18 @@ public class Main {
             System.exit(1);
         }
 
+        boolean success = runFirstJob(args[0], args[1]) && runSecondJob(args[1], args[2]);
 
+        System.exit(success ? 0 : 1);
+    }
+
+    public static boolean runFirstJob(String dataFile, String outputPath) throws Exception {
         Job job = new Job();
         job.setJarByClass(Main.class);
         job.setJobName("Yelp Sentiment Analysis");
 
-        FileInputFormat.setInputPaths(job, new Path(args[0]));
-        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        FileInputFormat.setInputPaths(job, new Path(dataFile));
+        FileOutputFormat.setOutputPath(job, new Path(outputPath));
 
         job.setMapperClass(SentimentMapper.class);
         job.setReducerClass(RatingReducer.class);
@@ -34,7 +39,23 @@ public class Main {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(DoubleWritable.class);
 
-        boolean success = job.waitForCompletion(true);
-        System.exit(success ? 0 : 1);
+        return job.waitForCompletion(true);
+    }
+
+    public static boolean runSecondJob(String dataFile, String outputPath) throws Exception {
+        Job job = new Job();
+        job.setJarByClass(Main.class);
+        job.setJobName("Yelp Sentiment Analysis");
+
+        FileInputFormat.setInputPaths(job, new Path(dataFile + "/part-r-00000"));
+        FileOutputFormat.setOutputPath(job, new Path(outputPath));
+
+        job.setMapperClass(VarianceMapper.class);
+        job.setReducerClass(AccuracyRatingReducer.class);
+
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(DoubleWritable.class);
+
+        return job.waitForCompletion(true);
     }
 }
