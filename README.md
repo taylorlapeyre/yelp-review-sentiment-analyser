@@ -17,14 +17,14 @@ First, you will need access to Yelp's academic dataset. Once you have it, put it
 
 ```bash
 $ hadoop fs -mkdir -p /user/you
-$ hadoop fs -put dataset.json /user/you
+$ hadoop fs -put sample-data.json /user/you
 ```
 
 Then, compile the source code and compress it into a jar:
 
 ```bash
-$ javac src/bigdata/*.java
-$ jar cvf analyser.jar src/*.class src/lexicon.ttf
+$ javac src/bigdata/*.java -classpath `hadoop classpath`
+$ jar cvf analyser.jar src/bigdata/*.class src/bigdata/lexicon.ttf
 ```
 
 Finally, run the mapreduce job with hadoop:
@@ -34,7 +34,7 @@ Finally, run the mapreduce job with hadoop:
 - The third is the hdfs output directory for the final result: the accuracy rating of the algorithm.
 
 ```bash
-hadoop jar sentiment.jar bigdata.Main /user/you/dataset.json rating-predictions final-result
+hadoop jar analyser.jar bigdata.Main /user/you/sample-data.json rating-predictions final-result
 ```
 
 Once completed, you can view the results:
