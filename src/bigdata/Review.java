@@ -26,7 +26,7 @@ public class Review {
 
             if (evaluator.lexicon.containsKey(word)) {
                 double lexiconValue = evaluator.lexicon.get(word);
-                double bonus = isExtreme ? (2 * lexiconValue) : 0;
+                double bonus = isExtreme ? (0.5 + lexiconValue) : 0;
 
                 sentiment += lexiconValue + bonus;
             }
